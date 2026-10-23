@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Samsung Galaxy Simulator - Namjoon Beta</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="phone-frame">
+    
+    <!-- ЕКРАН ВИБОРУ ГЕНДЕРУ -->
+    <div id="gender-select-screen" class="gender-screen">
+      <div class="gender-card">
+        <div class="gender-avatar">🐨</div>
+        <h2>Хто заходить?</h2>
+        <p>Виберіть режим спілкування з Намджуном:</p>
+        <div class="gender-buttons">
+          <button type="button" class="gender-btn boy-btn" onclick="selectGender('boy')">👦 Boy (Хлопець)</button>
+          <button type="button" class="gender-btn girl-btn" onclick="selectGender('girl')">👧 Girl (Дівчина)</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Статус-бар -->
+    <div class="status-bar">
+      <span id="clock">12:00</span>
+      <div class="camera-notch"></div>
+      <div class="status-right">
+        <span>5G</span>
+        <span>100% 🔋</span>
+      </div>
+    </div>
+
+    <!-- Екран блокування -->
+    <div id="lock-screen" class="lock-screen hidden-screen">
+      <div class="lock-header">
+        <div class="lock-icon">🔒</div>
+        <h2>Введіть PIN-код</h2>
+        <div class="dots-container">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+        <p id="error-msg" class="error-msg"></p>
+      </div>
+
+      <div class="keypad">
+        <button type="button" onclick="pressNum('1')"><span class="num">1</span><span class="letters">&nbsp;</span></button>
+        <button type="button" onclick="pressNum('2')"><span class="num">2</span><span class="letters">ABC</span></button>
+        <button type="button" onclick="pressNum('3')"><span class="num">3</span><span class="letters">DEF</span></button>
+        <button type="button" onclick="pressNum('4')"><span class="num">4</span><span class="letters">GHI</span></button>
+        <button type="button" onclick="pressNum('5')"><span class="num">5</span><span class="letters">JKL</span></button>
+        <button type="button" onclick="pressNum('6')"><span class="num">6</span><span class="letters">MNO</span></button>
+        <button type="button" onclick="pressNum('7')"><span class="num">7</span><span class="letters">PQRS</span></button>
+        <button type="button" onclick="pressNum('8')"><span class="num">8</span><span class="letters">TUV</span></button>
+        <button type="button" onclick="pressNum('9')"><span class="num">9</span><span class="letters">WXYZ</span></button>
+
+        <button type="button" class="text-btn">SOS</button>
+        <button type="button" onclick="pressNum('0')"><span class="num">0</span><span class="letters">+</span></button>
+        <button type="button" class="text-btn" onclick="clearNum()">⌫</button>
+      </div>
+    </div>
+
+    <!-- Робочий стіл -->
+    <div id="home-screen" class="home-screen">
+      <div class="app-icon" onclick="openApp('gallery')">
+        <div class="samsung-icon gallery-icon"></div>
+        <span>Галерея</span>
+      </div>
+
+      <div class="app-icon" onclick="openApp('messenger')">
+        <div class="samsung-icon messenger-icon"></div>
+        <span>Messenger</span>
+      </div>
+
+      <div class="app-icon" onclick="openApp('music')">
+        <div class="samsung-icon music-icon"><span>🎵</span></div>
+        <span>Музика</span>
+      </div>
+
+      <div class="app-icon" onclick="openApp('notes')">
+        <div class="samsung-icon notes-icon"><span>📝</span></div>
+        <span>Нотатки</span>
+      </div>
+
+      <div class="app-icon" onclick="openApp('profile')">
+        <div class="samsung-icon settings-icon"><span>⚙️</span></div>
+        <span>Профіль</span>
+      </div>
+
+      <div class="app-icon" onclick="lockPhone()">
+        <div class="samsung-icon lock-app-icon"><span>🔒</span></div>
+        <span>Блок.</span>
+      </div>
+    </div>
+
+    <!-- Вікно додатка -->
+    <div id="app-window" class="app-window hidden">
+      <button class="back-btn" onclick="closeApp()">← Назад</button>
+      <div id="app-content" class="app-content-scroll"></div>
+    </div>
+
+    <!-- Повноекранний перегляд -->
+    <div id="fullscreen-viewer" class="fullscreen-viewer hidden">
+      <button class="close-viewer" onclick="closeFullscreen()">✕</button>
+      <img id="fullscreen-img" src="" alt="Full Photo">
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

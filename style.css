@@ -1,0 +1,240 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: #0b0b0e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.phone-frame {
+  width: 350px;
+  height: 710px;
+  background-color: #000;
+  border: 10px solid #1c1c1e;
+  border-radius: 48px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85);
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGcQ7PHiy2xXblvV3BLRqtTYWWxHmM9Eh2wE5_4dQONtgO-cGQ1UTE9Fud&s=10');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+/* ЕКРАН ВИБОРУ ГЕНДЕРУ */
+.gender-screen {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(10, 10, 15, 0.92);
+  backdrop-filter: blur(25px);
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.gender-screen.hidden-screen {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.95);
+}
+
+.gender-card {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 28px;
+  padding: 30px 20px;
+  text-align: center;
+  color: white;
+  width: 100%;
+}
+
+.gender-avatar { font-size: 42px; margin-bottom: 10px; }
+.gender-card h2 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+.gender-card p { font-size: 13px; color: #ccc; margin-bottom: 22px; line-height: 1.4; }
+
+.gender-buttons { display: flex; flex-direction: column; gap: 12px; }
+
+.gender-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 18px;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.boy-btn { background: linear-gradient(135deg, #0084ff, #0055ff); }
+.girl-btn { background: linear-gradient(135deg, #ff416c, #ff4b2b); }
+.gender-btn:active { transform: scale(0.96); filter: brightness(0.9); }
+
+/* Статус-бар */
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  z-index: 25;
+  pointer-events: none;
+}
+
+.camera-notch {
+  width: 12px; height: 12px;
+  background-color: #000;
+  border-radius: 50%;
+  border: 1px solid #333;
+  position: absolute;
+  left: 50%; transform: translateX(-50%);
+  top: 12px;
+}
+
+.status-right span { margin-left: 4px; }
+
+/* ЕКРАН БЛОКУВАННЯ */
+.lock-screen {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(12, 12, 16, 0.78);
+  backdrop-filter: blur(20px);
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 60px 25px 35px; box-sizing: border-box;
+  z-index: 20;
+  transition: transform 0.45s cubic-bezier(0.1, 0.9, 0.2, 1), opacity 0.4s ease;
+}
+
+.lock-screen.hidden-screen { transform: translateY(-100%); opacity: 0; pointer-events: none; }
+.unlocked { transform: translateY(-100%); opacity: 0; pointer-events: none; }
+
+.lock-header { text-align: center; color: white; margin-top: 10px; }
+.lock-icon { font-size: 24px; margin-bottom: 6px; }
+.lock-header h2 { font-size: 16px; font-weight: 500; margin-bottom: 12px; }
+
+.dots-container { display: flex; justify-content: center; gap: 14px; margin-bottom: 6px; }
+.dot { width: 12px; height: 12px; border: 2px solid rgba(255, 255, 255, 0.8); border-radius: 50%; transition: all 0.2s ease; }
+.dot.active { background-color: #fff; border-color: #fff; box-shadow: 0 0 10px rgba(255,255,255,0.6); }
+
+.error-msg { color: #ff453a; font-size: 12px; height: 18px; margin-top: 4px; font-weight: 500; }
+
+.keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px 16px; justify-items: center; padding-bottom: 10px; }
+.keypad button { width: 68px; height: 68px; border-radius: 50%; background: rgba(255, 255, 255, 0.14); border: 1px solid rgba(255, 255, 255, 0.18); color: white; cursor: pointer; display: flex; flex-direction: column; justify-content: center; align-items: center; outline: none; }
+.keypad button * { pointer-events: none; }
+.keypad button:active { background: rgba(255, 255, 255, 0.35); transform: scale(0.92); }
+.keypad .num { font-size: 24px; font-weight: 400; line-height: 1.1; }
+.keypad .letters { font-size: 8px; font-weight: 600; letter-spacing: 1.5px; margin-top: 2px; opacity: 0.75; }
+.keypad .text-btn { background: transparent; border: none; font-size: 13px; font-weight: 500; color: rgba(255, 255, 255, 0.85); }
+
+/* РОБОЧИЙ СТІЛ */
+.home-screen {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px 10px;
+  padding: 20px 16px 35px;
+  width: 100%;
+}
+
+.app-icon { display: flex; flex-direction: column; align-items: center; cursor: pointer; color: white; font-size: 11px; font-weight: 500; text-shadow: 0 1px 3px rgba(0,0,0,0.9); }
+.samsung-icon { width: 58px; height: 58px; border-radius: 24px; display: flex; justify-content: center; align-items: center; font-size: 26px; margin-bottom: 5px; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35); border: 1px solid rgba(255, 255, 255, 0.22); position: relative; transition: transform 0.15s ease; }
+.app-icon:active .samsung-icon { transform: scale(0.9); }
+
+.gallery-icon { background-image: url('https://i.pinimg.com/736x/44/ef/b7/44efb7b89f69aeae6c4271c0b99919f6.jpg'); background-size: cover; background-position: center; }
+.messenger-icon { background-image: url('https://img.icons8.com/m_rounded/1200/facebook-messenger--v1.jpg'); background-size: cover; background-position: center; background-color: #0084ff; }
+.music-icon { background: linear-gradient(135deg, #3a7bd5, #3a6073); }
+.notes-icon { background: linear-gradient(135deg, #f857a6, #ff5858); }
+.settings-icon { background: linear-gradient(135deg, #616161, #9bc5c3); }
+.lock-app-icon { background: linear-gradient(135deg, #e52d27, #b31217); }
+
+/* ВІКНО ДОДАТКА С КРОЛОМ */
+.app-window {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: #111115; color: #fff;
+  padding: 40px 0 0 0;
+  transition: transform 0.35s cubic-bezier(0.1, 0.9, 0.2, 1);
+  box-sizing: border-box;
+  z-index: 15;
+  display: flex; flex-direction: column;
+}
+
+.app-content-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 20px;
+}
+
+.hidden { transform: translateY(100%); }
+
+.back-btn {
+  background: rgba(255, 255, 255, 0.15);
+  border: none; color: white;
+  padding: 6px 12px; border-radius: 10px;
+  font-size: 13px; cursor: pointer;
+  margin: 0 16px 10px 16px; font-weight: 500;
+  align-self: flex-start;
+}
+
+/* МЕСЕНДЖЕР */
+.messenger-header { font-size: 22px; font-weight: 800; padding: 10px 18px; letter-spacing: -0.5px; }
+.chat-list { display: flex; flex-direction: column; gap: 6px; padding: 0 10px 20px 10px; }
+
+.chat-item { display: flex; align-items: center; gap: 12px; padding: 10px 12px; background: rgba(255, 255, 255, 0.03); border-radius: 18px; }
+
+.chat-avatar-wrapper { position: relative; }
+.chat-avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
+.online-dot { position: absolute; bottom: 2px; right: 2px; width: 11px; height: 11px; background: #4cd137; border-radius: 50%; border: 2px solid #111115; }
+
+.chat-info { flex: 1; overflow: hidden; }
+.chat-name-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3px; }
+.chat-name { font-size: 14px; font-weight: 600; }
+.chat-time-last { font-size: 10px; color: #777; }
+.chat-last-msg { font-size: 12px; color: #aaa; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* ГАЛЕРЕЯ ONE UI (3 КОЛОНКИ С КВАДРАТИКАМИ) */
+.gallery-section { margin-bottom: 20px; padding: 0 12px; }
+.gallery-date { font-size: 13px; font-weight: 600; color: #e1e1e1; margin-bottom: 8px; border-left: 3px solid #ff416c; padding-left: 8px; }
+
+.photo-grid-mini {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.photo-card-sq {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  transition: transform 0.15s ease;
+}
+
+.photo-card-sq:active { transform: scale(0.95); }
+
+/* ПОВНОЕКРАННИЙ ПЕРЕГЛЯД */
+.fullscreen-viewer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.96); display: flex; justify-content: center; align-items: center; z-index: 50; transition: opacity 0.3s ease; }
+.fullscreen-viewer.hidden { opacity: 0; pointer-events: none; }
+.fullscreen-viewer img { max-width: 92%; max-height: 85%; object-fit: contain; border-radius: 12px; }
+.close-viewer { position: absolute; top: 25px; right: 25px; background: rgba(255,255,255,0.2); border: none; color: white; font-size: 18px; width: 38px; height: 38px; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; }
